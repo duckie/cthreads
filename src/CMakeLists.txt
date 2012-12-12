@@ -11,30 +11,15 @@ set(LIBRARIES)
 ### To be used by editing the cache manually
 include_directories(${MANUAL_INCLUDE_DIRS})
 
-### OpenCV support ###
-if(OpenCV_USE)
-    FIND_PACKAGE(OpenCV REQUIRED)
-    if(OpenCV_FOUND)
-        include_directories(${OpenCV_INCLUDE_DIRS})
-        set(LIBRARIES "${LIBRARIES}" "${OpenCV_LIBS}")
-    endif()
-endif()
+# pthread
+find_package (Threads)
+if(Threads_FOUND)
+    set(LIBRARIES ${LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+endif(Threads_FOUND)
 
-### Boost support ###
-if(Boost_USE)
-    FIND_PACKAGE(Boost COMPONENTS ${Boost_COMPONENTS} REQUIRED)
-    if(Boost_FOUND)
-	    include_directories(${Boost_INCLUDE_DIRS})
-        if(CMAKE_COMPILER_IS_GNUCXX)
-            set(LIBRARIES "${LIBRARIES}" "${Boost_LIBRARIES}")
-        else()
-            link_directories(${Boost_LIBRARY_DIRS})
-        endif()
-    endif()
-endif()
 
 ### Browsing source files ###
-file(GLOB SRCS_FILES *.cpp)
+file(GLOB SRCS_FILES *.c)
 
 ### Exe ###
 add_executable(${PROJECT_NAME} ${SRCS_FILES}) 

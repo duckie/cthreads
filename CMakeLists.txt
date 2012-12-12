@@ -1,7 +1,6 @@
-cmake_minimum_required (VERSION 2.6)
-include(CheckIncludeFileCXX)
+cmake_minimum_required (VERSION 2.8)
 
-project (CppProject)
+project (cprog)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
